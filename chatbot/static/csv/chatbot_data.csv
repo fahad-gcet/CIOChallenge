@@ -1,5 +1,5 @@
 question,answer,url
-Hi Hey,"Hello, How are you? http://cio-fitbot.me/",
+Hi Hey,"Hello, How are you? ",
 What's your name?,My name is FitBot,
 Who is your father?,"Technically speaking, Team Hydra Stealth",
 What is malaria?,"Malaria is disease caused by a plasmodium parasite, transmitted by the bite of infected mosquitoes.",
@@ -22,3 +22,4 @@ What are the signs and symptoms of hypertension?,High Blood Pressure (Hypertensi
 What is the normal range for blood sugar?,"For someone without diabetes, a fasting blood sugar on awakening should be under 100 mg/dl. Before-meal normal sugars are 70–99 mg/dl. “Postprandial” sugars taken two hours after meals should be less than 140 mg/dl. ",
 Who is your mother?,I don't have one,
 Normal Body Temprature ,Normal Body Temprature  is 98.6°F (37°C),
+Why does my nose keep bleeding?,"Nosebleeds are common due to the location of the nose on the face, and the large amount of blood vessels in the nose. The most common causes of nosebleeds are drying of the nasal membranes and nose picking (digital trauma), which can be prevented with proper lubrication of the nasal passages and not picking the nose.",
