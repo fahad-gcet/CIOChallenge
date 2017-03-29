@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<nav class="navbar navbar-dark bg-inverse navbar-full">
+    <a class="navbar-brand" href="{% url 'home' %}">FitBot</a>
+
+    <ul class="nav navbar-nav float-xs-right">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">
+                <button class="btn btn-sm btn-primary">Admin Login</button>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FitBot</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+    {% include 'nav.html' %}
+    <div class="container">
+        <div class="jumbotron mt-1">
+            <h1 class="jumbotron-heading text-xs-center">Welcome to FitBot</h1>
+            <p class="lead text-xs-center">
+                Enter message to talk to FitBot.
+            </p>
+            <hr class="my-1">
+            <div class="row">
+                <div class="col-xs-6 offset-xs-3">
+                    <ul class="list-group chat-log js-chat-log">
+                    </ul>
+                    <div class="input-group input-group-lg mt-1">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div  class="input-group">
+                                <input type="text" class="form-control js-text" placeholder="Type something to begin..." autofocus  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary js-say">Send</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/js.cookie.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script>
+        var $chatlog = $('.js-chat-log');
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function createRow(text) {
+        var $row = $('<li class="list-group-item"></li>');
+
+        $row.text(text);
+        $chatlog.append($row);
+        }
+
+
+        $(".js-say").click(function(e) {
+            e.preventDefault();
+            var csrftoken = getCookie('csrftoken');
+            var msgbox = $('.js-text');
+            var msg = msgbox.val();
+            createRow(msg);
+            $.ajax({
+                url : window.location.href,
+                type : "POST",
+                data : {
+                    csrfmiddlewaretoken : csrftoken,
+                    msg : msg
+                },
+
+                success : function(json) {
+                    console.log(json);
+                    createRow(json['answer']);
+                    $chatlog[0].scrollTop = $chatlog[0].scrollHeight;
+                },
+
+                error : function(xhr,errmsg,err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+            msgbox.val('');
+
+        });
+    </script>
+</body>
+</html>
